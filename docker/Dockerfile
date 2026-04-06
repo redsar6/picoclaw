@@ -38,6 +38,7 @@ USER picoclaw
 
 # Run onboard to create initial directories and config
 RUN /usr/local/bin/picoclaw onboard
-
+# Copy custom config
+COPY --chown=picoclaw:picoclaw config/config.json /home/picoclaw/.picoclaw/config.json
 ENTRYPOINT ["picoclaw"]
 CMD ["gateway"]
