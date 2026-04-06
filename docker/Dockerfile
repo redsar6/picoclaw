@@ -11,7 +11,8 @@ RUN apk add --no-cache ca-certificates tzdata curl
 COPY --from=builder /src/build/picoclaw /usr/local/bin/picoclaw
 RUN addgroup -g 1000 picoclaw && \
     adduser -D -u 1000 -G picoclaw picoclaw
+COPY --chown=picoclaw:picoclaw docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 USER picoclaw
 RUN /usr/local/bin/picoclaw onboard
-COPY --chown=picoclaw:picoclaw docker/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
